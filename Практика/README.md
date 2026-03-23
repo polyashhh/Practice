@@ -2,7 +2,6 @@ Hybrid Library
 Гибридная система управления библиотекой — учебное веб-приложение, демонстрирующее интеграцию Legacy PHP (SOAP + XML/XSLT) с современным REST API (Node.js + Express + TinyDB) и фронтендом.
 
 Структура проекта
-text
 Практика/
   php/                                # Legacy-часть
     config/
