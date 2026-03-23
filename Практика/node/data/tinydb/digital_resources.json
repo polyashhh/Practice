@@ -1,0 +1,38 @@
+[
+  {
+    "_id": "dr_001",
+    "title": "Clean Code (ebook)",
+    "author": "Robert C. Martin",
+    "format": "pdf",
+    "fileSize": 5242880,
+    "tags": [
+      "programming",
+      "best-practices"
+    ],
+    "downloadCount": 2
+  },
+  {
+    "_id": "dr_002",
+    "title": "Мастер и Маргарита (аудиокнига)",
+    "author": "Булгаков Михаил Афанасьевич",
+    "format": "mp3",
+    "fileSize": 73400320,
+    "tags": [
+      "classic",
+      "audio"
+    ],
+    "downloadCount": 1
+  },
+  {
+    "_id": "dr_003",
+    "title": "Design Patterns (summary)",
+    "author": "Gang of Four",
+    "format": "epub",
+    "fileSize": 3145728,
+    "tags": [
+      "architecture",
+      "patterns"
+    ],
+    "downloadCount": 2
+  }
+]

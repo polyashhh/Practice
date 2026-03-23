@@ -1,0 +1,20 @@
+[
+  {
+    "_id": "dl_001",
+    "resourceId": "dr_001",
+    "userId": "u_demo",
+    "timestamp": "2026-02-01T10:00:00Z"
+  },
+  {
+    "_id": "55beb4ae-5d90-462b-bee0-4dde6f4842b4",
+    "resourceId": "dr_002",
+    "userId": "u_demo",
+    "timestamp": "2026-02-18T12:59:34.453Z"
+  },
+  {
+    "_id": "99726362-5b23-4529-accc-25c85acd95a6",
+    "resourceId": "dr_003",
+    "userId": "u_demo",
+    "timestamp": "2026-02-18T13:03:24.589Z"
+  }
+]

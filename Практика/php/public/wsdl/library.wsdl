@@ -1,0 +1,196 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions
+  name="LibraryLegacyService"
+  targetNamespace="http://example.com/library/legacy"
+  xmlns="http://schemas.xmlsoap.org/wsdl/"
+  xmlns:tns="http://example.com/library/legacy"
+  xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+  xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+>
+
+  <types>
+    <xsd:schema targetNamespace="http://example.com/library/legacy" elementFormDefault="qualified">
+
+      <!-- ===== Requests / Responses as elements (document/literal) ===== -->
+      <xsd:element name="getBookByInventory">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="inventory_number" type="xsd:string"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+
+      <xsd:element name="getBookByInventoryResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <!-- XML string with book info -->
+            <xsd:element name="return" type="xsd:string"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+
+
+      <xsd:element name="searchBooksByAuthor">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="author_name" type="xsd:string"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+
+      <xsd:element name="searchBooksByAuthorResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <!-- XML string with list -->
+            <xsd:element name="return" type="xsd:string"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+
+
+      <xsd:complexType name="LoanResult">
+        <xsd:sequence>
+          <xsd:element name="success" type="xsd:boolean"/>
+          <xsd:element name="message" type="xsd:string"/>
+          <xsd:element name="loan_id" type="xsd:int" nillable="true"/>
+          <xsd:element name="inventory_number" type="xsd:string" nillable="true"/>
+          <xsd:element name="date_taken" type="xsd:string" nillable="true"/>
+        </xsd:sequence>
+      </xsd:complexType>
+
+      <xsd:element name="registerLoan">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="inventory_number" type="xsd:string"/>
+            <xsd:element name="reader_card" type="xsd:string"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+
+      <xsd:element name="registerLoanResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="return" type="tns:LoanResult"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+
+
+      <xsd:complexType name="ReturnResult">
+        <xsd:sequence>
+          <xsd:element name="success" type="xsd:boolean"/>
+          <xsd:element name="message" type="xsd:string"/>
+          <xsd:element name="inventory_number" type="xsd:string" nillable="true"/>
+          <xsd:element name="date_returned" type="xsd:string" nillable="true"/>
+        </xsd:sequence>
+      </xsd:complexType>
+
+      <xsd:element name="returnBook">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="inventory_number" type="xsd:string"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+
+      <xsd:element name="returnBookResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="return" type="tns:ReturnResult"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+
+    </xsd:schema>
+  </types>
+
+  <!-- ===== Messages ===== -->
+  <message name="getBookByInventoryRequest">
+    <part name="parameters" element="tns:getBookByInventory"/>
+  </message>
+  <message name="getBookByInventoryResponse">
+    <part name="parameters" element="tns:getBookByInventoryResponse"/>
+  </message>
+
+  <message name="searchBooksByAuthorRequest">
+    <part name="parameters" element="tns:searchBooksByAuthor"/>
+  </message>
+  <message name="searchBooksByAuthorResponse">
+    <part name="parameters" element="tns:searchBooksByAuthorResponse"/>
+  </message>
+
+  <message name="registerLoanRequest">
+    <part name="parameters" element="tns:registerLoan"/>
+  </message>
+  <message name="registerLoanResponse">
+    <part name="parameters" element="tns:registerLoanResponse"/>
+  </message>
+
+  <message name="returnBookRequest">
+    <part name="parameters" element="tns:returnBook"/>
+  </message>
+  <message name="returnBookResponse">
+    <part name="parameters" element="tns:returnBookResponse"/>
+  </message>
+
+  <!-- ===== PortType ===== -->
+  <portType name="LibraryLegacyPortType">
+    <operation name="getBookByInventory">
+      <input message="tns:getBookByInventoryRequest"/>
+      <output message="tns:getBookByInventoryResponse"/>
+    </operation>
+
+    <operation name="searchBooksByAuthor">
+      <input message="tns:searchBooksByAuthorRequest"/>
+      <output message="tns:searchBooksByAuthorResponse"/>
+    </operation>
+
+    <operation name="registerLoan">
+      <input message="tns:registerLoanRequest"/>
+      <output message="tns:registerLoanResponse"/>
+    </operation>
+
+    <operation name="returnBook">
+      <input message="tns:returnBookRequest"/>
+      <output message="tns:returnBookResponse"/>
+    </operation>
+  </portType>
+
+  <!-- ===== Binding ===== -->
+  <binding name="LibraryLegacyBinding" type="tns:LibraryLegacyPortType">
+    <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+
+    <operation name="getBookByInventory">
+      <soap:operation soapAction="getBookByInventory"/>
+      <input><soap:body use="literal"/></input>
+      <output><soap:body use="literal"/></output>
+    </operation>
+
+    <operation name="searchBooksByAuthor">
+      <soap:operation soapAction="searchBooksByAuthor"/>
+      <input><soap:body use="literal"/></input>
+      <output><soap:body use="literal"/></output>
+    </operation>
+
+    <operation name="registerLoan">
+      <soap:operation soapAction="registerLoan"/>
+      <input><soap:body use="literal"/></input>
+      <output><soap:body use="literal"/></output>
+    </operation>
+
+    <operation name="returnBook">
+      <soap:operation soapAction="returnBook"/>
+      <input><soap:body use="literal"/></input>
+      <output><soap:body use="literal"/></output>
+    </operation>
+
+  </binding>
+
+  <!-- ===== Service ===== -->
+  <service name="LibraryLegacyService">
+    <port name="LibraryLegacyPort" binding="tns:LibraryLegacyBinding">
+      <soap:address location="http://127.0.0.1:8001/soap-server.php"/>
+    </port>
+  </service>
+
+</definitions>

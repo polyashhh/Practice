@@ -1,0 +1,112 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Hybrid Library — Практика</title>
+  <link rel="stylesheet" href="./styles.css" />
+</head>
+<body>
+<header class="topbar">
+  <div class="brand">
+    <div>
+      <div class="brand__title">Hybrid Library</div>
+    </div>
+  </div>
+  <div class="config">
+    <label class="config__label">
+      API Base URL
+      <input id="apiBase" class="input" placeholder="http://127.0.0.1:3000" />
+    </label>
+    <button id="btnSaveConfig" class="btn btn--ghost" type="button">Сохранить</button>
+  </div>
+</header>
+<nav class="tabs">
+  <button class="tab tab--active" data-tab="physical" type="button">Книги</button>
+  <button class="tab" data-tab="digital" type="button">Цифровые ресурсы</button>
+  <button class="tab" data-tab="report" type="button">Отчёт</button>
+</nav>
+<main class="container">
+  <section id="tab-physical" class="panel panel--active">
+    <h2>Поиск книг</h2>
+    <p class="muted">по автору или инвентарному номеру</p>
+    <div class="card">
+      <div class="grid2">
+        <div>
+          <label class="label">Инвентарный номер</label>
+          <input id="phyInv" class="input" placeholder="LIB-2024-001" />
+          <div class="hint">точное совпадение</div>
+        </div>
+        <div>
+          <label class="label">Автор</label>
+          <input id="phyAuthor" class="input" placeholder="например, Толстой" />
+          <div class="hint">можно ввести часть фамилии</div>
+        </div>
+      </div>
+      <div class="row">
+        <button id="btnPhySearch" class="btn" type="button">Найти</button>
+        <div class="row row--right">
+          <label class="label" style="margin:0;">Читательский билет</label>
+          <input id="phyReaderCard" class="input input--sm" placeholder="R-12345" />
+        </div>
+      </div>
+      <div id="phyMsg" class="msg" style="display:none;"></div>
+      <div class="tableWrap">
+        <table class="table">
+          <thead>
+            <tr><th>№</th><th>Название</th><th>Автор</th><th>Год</th><th>Место</th><th>Статус</th><th></th></tr>
+          </thead>
+          <tbody id="phyTbody">
+            <tr><td colspan="7" class="muted" style="text-align:center;">нет результатов, начните поиск</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+  <section id="tab-digital" class="panel">
+    <h2>Цифровые издания</h2>
+    <p class="muted">электронные книги, статьи, документы</p>
+    <div class="card">
+      <div class="row">
+        <button id="btnDigitalLoad" class="btn" type="button">Загрузить каталог</button>
+        <div class="row row--right">
+          <label class="label" style="margin:0;">userId</label>
+          <input id="digUserId" class="input input--sm" placeholder="u_demo" />
+        </div>
+      </div>
+      <div id="digMsg" class="msg" style="display:none;"></div>
+      <div class="tableWrap">
+        <table class="table">
+          <thead>
+            <tr><th>ID</th><th>Название</th><th>Автор</th><th>Формат</th><th>Размер</th><th>Теги</th><th>Скачивания</th><th></th></tr>
+          </thead>
+          <tbody id="digTbody">
+            <tr><td colspan="8" class="muted" style="text-align:center;">нажмите «Загрузить каталог»</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+  <section id="tab-report" class="panel">
+    <h2>Административный отчёт</h2>
+    <p class="muted">просмотр задолженностей через XML/XSLT трансформацию</p>
+
+    <div class="card">
+      <div class="row">
+        <label class="label" style="margin:0;">URL отчёта</label>
+        <input id="reportUrl" class="input" placeholder="http://127.0.0.1:8001/report.php?type=overdue" />
+        <button id="btnReportOpen" class="btn btn--ghost" type="button">Обновить</button>
+      </div>
+
+      <div class="iframeWrap">
+        <iframe id="reportFrame" title="Overdue report"></iframe>
+      </div>
+      <div class="hint">если отчёт пустой — выдайте книгу и обновите вкладку. Можно добавить <code>?type=overdue&days=1</code></div>
+    </div>
+  </section>
+</main>
+<footer class="footer">
+</footer>
+<script src="./app.js"></script>
+</body>
+</html>
